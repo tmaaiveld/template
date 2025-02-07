@@ -8,10 +8,10 @@ authors = [
 readme = "README.md"
 requires-python = ">=3.11"
 
-[dependencies]
+[tool.poetry.dependencies]
+python = "^3.11"
 
-
-[dev-dependencies]
+[tool.poetry.group.dev.dependencies]
 pytest = "^8.3.4"
 pytest-cov = "^6.0.0"
 ruff = "^0.9.5"
