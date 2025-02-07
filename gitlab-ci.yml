@@ -1,0 +1,67 @@
+image: python:3.11
+
+variables:
+  SECURE_FILES_DOWNLOAD_PATH: '.'
+
+before_script:
+  - curl -sSL https://install.python-poetry.org | python3 -  # Only installs Poetry if missing
+  - export PATH="$HOME/.local/bin:$PATH"
+  - poetry install --no-root  # Uses lockfile to speed up dependency resolution
+  - source `poetry env info --path`/bin/activate
+
+stages:
+  - test
+  - documentation
+  - build
+  - publish
+
+cache:
+  key: poetry-${CI_COMMIT_REF_SLUG}
+  paths:
+    - /root/.cache/pypoetry/
+    - /root/.cache/pip/
+
+unit-test-job:
+  stage: test
+  script:
+    - pytest --cache-clear --last-failed --cov --cov-report term --cov-report xml:coverage.xml -v
+  coverage: '/(?i)total.*? (100(?:\.0+)?\%|[1-9]?\d(?:\.\d+)?\%)$/'
+  cache:
+    key: pytest-cache-${CI_COMMIT_REF_SLUG}
+    paths:
+      - .pytest_cache/
+  rules:
+    - when: always
+
+pages:
+  stage: documentation
+  publish: site
+  script:
+    - mkdocs build --verbose
+  artifacts:
+    paths:
+      - site
+  rules:
+    - when: always
+
+build:
+  stage: build
+  script:
+    - poetry build
+  artifacts:
+    paths:
+      - dist/*
+  rules:
+    - when: always
+
+publish:
+  stage: publish
+  variables:
+    POETRY_HTTP_BASIC_PUBLISH_TNO_V_USERNAME: "gitlab-ci-token"
+    POETRY_HTTP_BASIC_PUBLISH_TNO_V_PASSWORD: "${CI_JOB_TOKEN}"
+  dependencies:
+    - build
+  script:
+    - poetry publish --repository publish-tno-v || echo "Nothing to publish."
+  rules:
+    - if: '$CI_COMMIT_TAG && $CI_COMMIT_TAG != ""'
