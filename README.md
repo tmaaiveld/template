@@ -15,7 +15,7 @@ You can install **<TEMPLATE:project_title>** using **Poetry**:
     ```
 2. Install with Poetry (use `--dev` to install development dependencies):
     ```sh
-    poetry install --dev
+    poetry install --with dev
     ```
 3. Run the tests:
     ```sh
