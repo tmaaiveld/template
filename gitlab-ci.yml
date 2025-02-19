@@ -2,6 +2,10 @@ image: python:3.11
 
 variables:
   SECURE_FILES_DOWNLOAD_PATH: '.'
+  SUBMODULE_STRATEGY: recursive
+  GIT_SUBMODULE_STRATEGY: recursive
+  GIT_SUBMODULE_FORCE_HTTPS: "true"
+  GIT_SUBMODULE_DEPTH: 20
 
 before_script:
   - curl -sSL https://install.python-poetry.org | python3 -  # Only installs Poetry if missing
