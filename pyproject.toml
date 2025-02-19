@@ -1,9 +1,9 @@
 [project]
-name = "template"
+name = "<TEMPLATE:project_name>"
 version = "0.1.0"
 description = ""
 authors = [
-    {name = "Thomas M. Maaiveld (Tommy)",email = "tommy.maaiveld@tno.nl"}
+    {name = " <TEMPLATE:author_name>",email = " <TEMPLATE:author_email>"}
 ]
 readme = "README.md"
 requires-python = ">=3.11"
