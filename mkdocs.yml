@@ -1,0 +1,45 @@
+site_name: <TEMPLATE:project_title>
+#site_url: https://your-docs-url.com
+repo_url: <TEMPLATE:project_url>
+site_description: <TEMPLATE:project_description>
+site_author: <TEMPLATE:project_author>
+
+
+theme:
+  name: material
+  palette:
+    scheme: default
+    primary: blue
+    accent: indigo
+  features:
+    - navigation.tabs  # Enables tabs at the top
+    - navigation.instant
+    - navigation.tracking
+    - navigation.sections
+    - toc.integrate
+    - search.highlight
+    - search.suggest
+
+markdown_extensions:
+  - toc:
+      permalink: true
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tabbed
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - admonition
+  - codehilite
+  - footnotes
+  - attr_list
+  - md_in_html
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            show_source: false
