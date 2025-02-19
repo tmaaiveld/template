@@ -1,6 +1,4 @@
 site_name: <TEMPLATE:project_title>
-#site_url: https://your-docs-url.com
-repo_url: <TEMPLATE:project_url>
 site_description: <TEMPLATE:project_description>
 site_author: <TEMPLATE:project_author>
 
