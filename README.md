@@ -28,7 +28,7 @@ You can install **<TEMPLATE:project_name>** using **Poetry**:
     git clone
     cd <TEMPLATE:repository_name>
     ```
-2. Install with Poetry (use `--dev` to install development dependencies):
+2. Install with Poetry (use `--with dev` to install development dependencies):
     ```sh
     poetry install --with dev
     ```
